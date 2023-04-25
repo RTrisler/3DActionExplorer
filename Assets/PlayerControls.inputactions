@@ -92,6 +92,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Player Actions",
+            "id": "f2bac709-5bc5-42c2-94cb-0d28cbb34a23",
+            "actions": [
+                {
+                    "name": "Sprint",
+                    "type": "Button",
+                    "id": "b9f1a5fe-39bc-48fd-9585-9ec60c510d63",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "494b87fd-4107-4383-a29d-b23d0176fe0b",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Sprint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
