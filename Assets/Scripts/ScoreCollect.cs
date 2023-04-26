@@ -9,9 +9,13 @@ public class ScoreCollect : MonoBehaviour, IPickupable
     private Rigidbody _collectBody;
 
     [SerializeField]
+    private ParticleSystem _myParticles;
+
+    [SerializeField]
     private int _scoreValue;
     public void collect(PlayerManager playerManager)
     {
+        Instantiate(_myParticles, transform.position, transform.rotation);
         playerManager.score += _scoreValue;
         Destroy(gameObject);
     }
