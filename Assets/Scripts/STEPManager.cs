@@ -6,6 +6,16 @@ public class STEPManager : MonoBehaviour
 {
     public float _charge = 0;
     private StepState _currentStepState = StepState.Uncharged;
+
+    private void OnEnable()
+    {
+        Projectile.OnPlayerHit += SubCharge;
+    }
+
+    private void OnDisable()
+    {
+        Projectile.OnPlayerHit -= SubCharge;
+    }
     public void HandleStepState(MovementState playerMovementState, PlayerLocomotion playerLocomotion)
     {
         switch(playerMovementState)
@@ -107,6 +117,18 @@ public class STEPManager : MonoBehaviour
                         break;
                 }
                 break;
+        }
+    }
+
+    private void SubCharge()
+    {
+        if(_charge < 5)
+        {
+            _charge = 0;
+        }
+        else
+        {
+            _charge -= 5;
         }
     }
 }
