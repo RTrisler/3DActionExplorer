@@ -7,6 +7,7 @@ public class PlayerLocomotion : MonoBehaviour
     PlayerManager playerManager;
     InputManager inputManager;
     AnimatorManager animatorManager;
+    STEPManager stepManager;
 
     Vector3 moveDirection;
     Transform cameraObject;
@@ -34,12 +35,16 @@ public class PlayerLocomotion : MonoBehaviour
     public float jumpHeight = 3;
     public float gravityIntensity = -15f;
 
+    [Header("Movement State")]
+    public MovementState currentMovementState;
+
     private void Awake()
     {
         playerManager = GetComponent<PlayerManager>();
         inputManager = GetComponent<InputManager>();
         animatorManager = GetComponent<AnimatorManager>();
         playerRigidBody = GetComponent<Rigidbody>();
+        stepManager = GetComponent<STEPManager>();
         cameraObject = Camera.main.transform;
 
     }
@@ -82,6 +87,15 @@ public class PlayerLocomotion : MonoBehaviour
             }
         }
         Vector3 movementVelocity = moveDirection;
+        if(moveDirection == Vector3.zero) //changes movement state based on if the player is move or not
+        {
+            currentMovementState = MovementState.Uncharging;
+        }
+        else
+        {
+            currentMovementState = MovementState.Charging;
+        }
+        stepManager.HandleStepState(currentMovementState, this);
         playerRigidBody.velocity = movementVelocity;
     }
 
@@ -155,5 +169,19 @@ public class PlayerLocomotion : MonoBehaviour
             playerVelocity.y = jumpingVelocity;
             playerRigidBody.velocity = playerVelocity;
         }
+    }
+
+    public void SpeedUpMovement()
+    {
+        walkingSpeed += 5f;
+        runningSpeed += 5f;
+        sprintingSpeed += 5f;
+    }
+
+    public void SlowDownMovement()
+    {
+        walkingSpeed -= 5f;
+        runningSpeed -= 5f;
+        sprintingSpeed -= 5f;
     }
 }

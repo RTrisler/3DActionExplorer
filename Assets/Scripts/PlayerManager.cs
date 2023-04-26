@@ -9,6 +9,9 @@ public class PlayerManager : MonoBehaviour
     CameraManager cameraManager;
     PlayerLocomotion playerLocomotion;
 
+    public int score { get; set; }
+
+    public GameObject collectPoint;
     public bool isInteracting;
 
     private void Awake()
@@ -38,5 +41,4 @@ public class PlayerManager : MonoBehaviour
         playerLocomotion.isJumping = animator.GetBool("isJumping");
         animator.SetBool("isGrounded", playerLocomotion.isGrounded);
     }
-
 }
