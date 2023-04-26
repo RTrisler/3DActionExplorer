@@ -11,6 +11,9 @@ public class PlayerManager : MonoBehaviour
 
     public int score { get; set; }
 
+    [SerializeField]
+    public int health;
+
     public GameObject collectPoint;
     public bool isInteracting;
 
@@ -40,5 +43,13 @@ public class PlayerManager : MonoBehaviour
 
         playerLocomotion.isJumping = animator.GetBool("isJumping");
         animator.SetBool("isGrounded", playerLocomotion.isGrounded);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.TryGetComponent<IDamageAble>(out IDamageAble damage))
+        {
+            damage.Damage(this);
+        }
     }
 }

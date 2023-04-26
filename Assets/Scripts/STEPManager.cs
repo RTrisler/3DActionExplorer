@@ -19,8 +19,8 @@ public class STEPManager : MonoBehaviour
                 {
                     _charge -= Time.deltaTime * 2;
                 }
-                Debug.Log(_charge);
-                Debug.Log(_currentStepState);
+                //Debug.Log(_charge);
+                //Debug.Log(_currentStepState);
                 switch (_currentStepState)
                 {
                     case StepState.Uncharged:
@@ -68,8 +68,8 @@ public class STEPManager : MonoBehaviour
                     _charge += Time.deltaTime;
                 }
                 _charge += Time.deltaTime;
-                Debug.Log(_charge);
-                Debug.Log(_currentStepState);
+                //Debug.Log(_charge);
+                //Debug.Log(_currentStepState);
                 switch (_currentStepState)
                 {
                     case StepState.Uncharged:
