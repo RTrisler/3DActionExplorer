@@ -6006,10 +6006,13 @@ MonoBehaviour:
     m_Bits: 1
   isSprinting: 0
   isGrounded: 1
+  isJumping: 0
   walkingSpeed: 1.5
   runningSpeed: 5
   sprintingSpeed: 7
   rotationSpeed: 15
+  jumpHeight: 1
+  gravityIntensity: -15
 --- !u!114 &646838405530629322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6035,6 +6038,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bb3f048739e8174489fc519e5417591, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
 --- !u!95 &646838405530629324
 Animator:
   serializedVersion: 5
