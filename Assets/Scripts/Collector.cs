@@ -15,7 +15,7 @@ public class Collector : MonoBehaviour
     private void FixedUpdate()
     {
         Debug.DrawRay(transform.position, transform.forward * .05f, Color.green);
-        if (Physics.Raycast(transform.position, transform.forward, out hit, .05f))
+        if (Physics.Raycast(transform.position, transform.forward * .05f, out hit, .05f))
         {
             if (hit.transform.TryGetComponent<IPickupable>(out IPickupable pickup))
             {

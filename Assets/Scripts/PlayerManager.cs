@@ -14,8 +14,41 @@ public class PlayerManager : MonoBehaviour
     [SerializeField]
     public int health;
 
+    [SerializeField]
+    private LayerMask InteractMask;
+
     public GameObject collectPoint;
     public bool isInteracting;
+    public bool _canInteractSpecial = false;
+
+    private RaycastHit hit;
+
+    private void Start()
+    {
+        inputManager.OnInteractPressed += InputManager_OnInteractPressed;
+    }
+
+    private void InputManager_OnInteractPressed(object sender, System.EventArgs e)
+    {
+        float interactDistance = 2f;
+        var interactPoint = this.transform.position + Vector3.up * .9f;
+        var rayLength = this.transform.forward * 2f;
+        if (Physics.Raycast(interactPoint, rayLength, out hit, interactDistance, InteractMask))
+        {
+            if(hit.transform.TryGetComponent<IInteractable>(out IInteractable interactor))
+            {
+                interactor.Interact();
+            }
+            if(hit.transform.TryGetComponent<ISpecialInteractable>(out ISpecialInteractable specialInteract) && _canInteractSpecial)
+            {
+                specialInteract.Interact();
+            }
+        }
+        else
+        {
+            Debug.Log("Nothing hit");
+        }
+    }
 
     private void Awake()
     {

@@ -16,7 +16,7 @@ public class STEPManager : MonoBehaviour
     {
         Projectile.OnPlayerHit -= SubCharge;
     }
-    public void HandleStepState(MovementState playerMovementState, PlayerLocomotion playerLocomotion)
+    public void HandleStepState(MovementState playerMovementState, PlayerLocomotion playerLocomotion, PlayerManager playerManager)
     {
         switch(playerMovementState)
         {
@@ -51,6 +51,7 @@ public class STEPManager : MonoBehaviour
                     case StepState.E:
                         if (_charge <= 10)
                         {
+                            playerManager._canInteractSpecial = false;
                             _currentStepState = StepState.T;
                         }
                         break;
@@ -98,6 +99,7 @@ public class STEPManager : MonoBehaviour
                     case StepState.T:
                         if(_charge >= 10)
                         {
+                            playerManager._canInteractSpecial = true;
                             _currentStepState = StepState.E;
                         }
                         break;

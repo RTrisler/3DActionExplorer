@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class InputManager : MonoBehaviour
 {
+    public event EventHandler OnInteractPressed;
+
     PlayerControls playerControls;
     PlayerLocomotion playerLocomotion;
     AnimatorManager animatorManager;
@@ -40,9 +43,15 @@ public class InputManager : MonoBehaviour
             playerControls.PlayerActions.Sprint.performed += i => sprint_input = true;
             playerControls.PlayerActions.Sprint.canceled += i => sprint_input = false;
             playerControls.PlayerActions.Jump.performed += i => jump_input = true;
+            playerControls.PlayerActions.Interact.performed += Interact_performed;
         }
 
         playerControls.Enable();
+    }
+
+    private void Interact_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnInteractPressed?.Invoke(this, EventArgs.Empty);
     }
 
     private void OnDisable()

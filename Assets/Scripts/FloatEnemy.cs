@@ -39,7 +39,7 @@ public class FloatEnemy : MonoBehaviour
             this.transform.rotation = Quaternion.LookRotation(newLookDirection);
             await Task.Yield();
         }
-        Instantiate(_myProj, _firePoint.transform);
+        Instantiate(_myProj, _firePoint.transform.position, _firePoint.transform.rotation);
         _isFiring = false;
         Debug.Log("Task finished");
     }

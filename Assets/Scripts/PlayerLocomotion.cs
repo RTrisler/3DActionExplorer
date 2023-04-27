@@ -95,7 +95,7 @@ public class PlayerLocomotion : MonoBehaviour
         {
             currentMovementState = MovementState.Charging;
         }
-        stepManager.HandleStepState(currentMovementState, this);
+        stepManager.HandleStepState(currentMovementState, this, playerManager);
         playerRigidBody.velocity = movementVelocity;
     }
 
