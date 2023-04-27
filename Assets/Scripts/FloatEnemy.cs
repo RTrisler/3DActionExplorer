@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 public class FloatEnemy : MonoBehaviour
 {
     private bool _isFiring;
+    private bool _inRange;
     private PlayerManager _player;
     [SerializeField]
     private float _lookTime;
@@ -19,12 +20,22 @@ public class FloatEnemy : MonoBehaviour
     {
         if(other.TryGetComponent<PlayerManager>(out PlayerManager player))
         {
+            _inRange = true;
             _player = player;
             if (!_isFiring)
             {
                 _isFiring = true;
                 MoveTowardsPlayer(_lookTime);
             }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.TryGetComponent<PlayerManager>(out PlayerManager player))
+        {
+            _inRange = false;
+            _player = player;
         }
     }
 
@@ -40,6 +51,10 @@ public class FloatEnemy : MonoBehaviour
             await Task.Yield();
         }
         Instantiate(_myProj, _firePoint.transform.position, _firePoint.transform.rotation);
+        if (_inRange)
+        {
+            MoveTowardsPlayer(duration);
+        }
         _isFiring = false;
         Debug.Log("Task finished");
     }
