@@ -18,6 +18,7 @@ public class PlayerManager : MonoBehaviour
     private LayerMask InteractMask;
 
     public GameObject collectPoint;
+    public bool isInteractingWithNPC;
     public bool isInteracting;
     public bool _canInteractSpecial = false;
 
@@ -43,10 +44,21 @@ public class PlayerManager : MonoBehaviour
             {
                 specialInteract.Interact();
             }
+            if(hit.transform.TryGetComponent<INPCInteractable>(out INPCInteractable npcInteract))
+            {
+                if (!isInteractingWithNPC)
+                {
+                    isInteractingWithNPC = true;
+                    npcInteract.Interact();
+                }
+                else
+                {
+                    isInteractingWithNPC = false;
+                }
+            }
         }
         else
         {
-            Debug.Log("Nothing hit");
         }
     }
 
@@ -60,17 +72,26 @@ public class PlayerManager : MonoBehaviour
 
     private void Update()
     {
-        inputManager.HandleAllInputs();
+        if (!isInteractingWithNPC)
+        {
+            inputManager.HandleAllInputs();
+        }
     }
 
     private void FixedUpdate()
     {
-        playerLocomotion.HandleAllMovement();
+        if (!isInteractingWithNPC)
+        {
+            playerLocomotion.HandleAllMovement();
+        }
     }
 
     private void LateUpdate()
     {
-        cameraManager.HandleAllCameraMovement();
+        if (!isInteractingWithNPC)
+        {
+            cameraManager.HandleAllCameraMovement();
+        }
 
         isInteracting = animator.GetBool("isInteracting");
 
