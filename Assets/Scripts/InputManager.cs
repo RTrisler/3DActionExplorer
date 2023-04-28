@@ -44,7 +44,7 @@ public class InputManager : MonoBehaviour
 
             playerControls.PlayerActions.Sprint.performed += i => sprint_input = true;
             playerControls.PlayerActions.Sprint.canceled += i => sprint_input = false;
-            playerControls.PlayerActions.Jump.performed += NewJumpHandle;
+            playerControls.PlayerActions.Jump.performed += i => jump_input = true;
             playerControls.PlayerActions.Interact.performed += Interact_performed;
         }
 
@@ -107,12 +107,17 @@ public class InputManager : MonoBehaviour
 
     private void NewJumpHandle(InputAction.CallbackContext value)
     {
-        while (value.performed)
+        Debug.Log("this");
+        if(value.performed)
         {
             _jumpCharge += Time.deltaTime;
         }
-        jump_input = false;
-        playerLocomotion.HandleJumping(_jumpCharge);
+        if(value.canceled)
+        {
+            jump_input = false;
+            playerLocomotion.HandleJumping(_jumpCharge);
+            _jumpCharge = 0;
+        }
     }
 
 }
