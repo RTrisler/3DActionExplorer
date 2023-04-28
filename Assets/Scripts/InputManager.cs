@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class InputManager : MonoBehaviour
     public float moveAmount;
     public float verticalInput;
     public float horizontalInput;
+    private float _jumpCharge;
 
     public bool sprint_input;
     public bool jump_input;
@@ -42,7 +44,7 @@ public class InputManager : MonoBehaviour
 
             playerControls.PlayerActions.Sprint.performed += i => sprint_input = true;
             playerControls.PlayerActions.Sprint.canceled += i => sprint_input = false;
-            playerControls.PlayerActions.Jump.performed += i => jump_input = true;
+            playerControls.PlayerActions.Jump.performed += NewJumpHandle;
             playerControls.PlayerActions.Interact.performed += Interact_performed;
         }
 
@@ -99,8 +101,18 @@ public class InputManager : MonoBehaviour
         if (jump_input)
         {
             jump_input = false;
-            playerLocomotion.HandleJumping();
+            playerLocomotion.HandleJumping(0f);
         }
+    }
+
+    private void NewJumpHandle(InputAction.CallbackContext value)
+    {
+        while (value.performed)
+        {
+            _jumpCharge += Time.deltaTime;
+        }
+        jump_input = false;
+        playerLocomotion.HandleJumping(_jumpCharge);
     }
 
 }

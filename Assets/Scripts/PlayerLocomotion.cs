@@ -25,6 +25,8 @@ public class PlayerLocomotion : MonoBehaviour
     public bool isGrounded;
     public bool isJumping;
 
+    private bool _extendedJump = false;
+
     [Header("Movement Speeds")]
     public float walkingSpeed = 1.5f;
     public float runningSpeed = 5;
@@ -157,9 +159,29 @@ public class PlayerLocomotion : MonoBehaviour
 
     }
 
-    public void HandleJumping()
+    public void HandleJumping(float jumpCharge)
     {
-        if (isGrounded)
+        if (isGrounded && !_extendedJump)
+        {
+            animatorManager.animator.SetBool("isJumping", true);
+            animatorManager.PlayTargetAnimation("Jumping", true);
+
+            float jumpingVelocity = Mathf.Sqrt(-2 * gravityIntensity * jumpHeight);
+            Vector3 playerVelocity = moveDirection;
+            playerVelocity.y = jumpingVelocity;
+            playerRigidBody.velocity = playerVelocity;
+        }
+        else if(isGrounded && _extendedJump && jumpCharge > 1)
+        {
+            animatorManager.animator.SetBool("isJumping", true);
+            animatorManager.PlayTargetAnimation("Jumping", true);
+
+            float jumpingVelocity = Mathf.Sqrt(-2 * gravityIntensity * (jumpHeight + jumpCharge));
+            Vector3 playerVelocity = moveDirection;
+            playerVelocity.y = jumpingVelocity;
+            playerRigidBody.velocity = playerVelocity;
+        }
+        else if (isGrounded && _extendedJump && jumpCharge < 1)
         {
             animatorManager.animator.SetBool("isJumping", true);
             animatorManager.PlayTargetAnimation("Jumping", true);
