@@ -25,7 +25,7 @@ public class PlayerLocomotion : MonoBehaviour
     public bool isGrounded;
     public bool isJumping;
 
-    private bool _extendedJump = false;
+    private bool _extendedJump = true;
 
     [Header("Movement Speeds")]
     public float walkingSpeed = 1.5f;
@@ -161,6 +161,10 @@ public class PlayerLocomotion : MonoBehaviour
 
     public void HandleJumping(float jumpCharge)
     {
+        if(jumpCharge > 5)
+        {
+            jumpCharge = 5;
+        }
         if (isGrounded && !_extendedJump)
         {
             animatorManager.animator.SetBool("isJumping", true);

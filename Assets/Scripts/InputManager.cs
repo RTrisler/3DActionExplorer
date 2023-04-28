@@ -25,6 +25,7 @@ public class InputManager : MonoBehaviour
 
     public bool sprint_input;
     public bool jump_input;
+    private bool _jumpCharging;
 
 
     private void Awake()
@@ -44,11 +45,20 @@ public class InputManager : MonoBehaviour
 
             playerControls.PlayerActions.Sprint.performed += i => sprint_input = true;
             playerControls.PlayerActions.Sprint.canceled += i => sprint_input = false;
-            playerControls.PlayerActions.Jump.performed += i => jump_input = true;
+            playerControls.PlayerActions.Jump.performed += StartJump;
+            playerControls.PlayerActions.Jump.canceled += StopJump;
             playerControls.PlayerActions.Interact.performed += Interact_performed;
         }
 
         playerControls.Enable();
+    }
+
+    private void Update()
+    {
+        if (_jumpCharging)
+        {
+            _jumpCharge += Time.deltaTime;
+        }
     }
 
     private void Interact_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
@@ -105,19 +115,16 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    private void NewJumpHandle(InputAction.CallbackContext value)
+    private void StartJump(InputAction.CallbackContext value)
     {
-        Debug.Log("this");
-        if(value.performed)
-        {
-            _jumpCharge += Time.deltaTime;
-        }
-        if(value.canceled)
-        {
-            jump_input = false;
-            playerLocomotion.HandleJumping(_jumpCharge);
-            _jumpCharge = 0;
-        }
+        _jumpCharging = true;
+    }
+
+    private void StopJump(InputAction.CallbackContext value)
+    {
+        _jumpCharging = false;
+        playerLocomotion.HandleJumping(_jumpCharge);
+        _jumpCharge = 0f;
     }
 
 }
