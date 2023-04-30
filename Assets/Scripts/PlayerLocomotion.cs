@@ -11,7 +11,7 @@ public class PlayerLocomotion : MonoBehaviour
 
     Vector3 moveDirection;
     Transform cameraObject;
-    Rigidbody playerRigidBody;
+    public Rigidbody playerRigidBody;
 
     [Header("Falling")]
     public float inAirTimer;
