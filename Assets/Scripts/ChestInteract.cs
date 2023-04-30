@@ -11,13 +11,20 @@ public class ChestInteract : MonoBehaviour, IInteractable
     [SerializeField]
     private Transform _spawnLocation;
 
+    private Animator _chestAnimator;
+
     private bool _canInteract = true;
+
+    void Start()
+    {
+        _chestAnimator = GetComponent<Animator>();
+    }
 
     public void Interact()
     {
         if (_canInteract)
         {
-            StartCoroutine(SpawnScoreBall());
+            _chestAnimator.SetBool("opening", true);
         }
     }
 
@@ -30,6 +37,5 @@ public class ChestInteract : MonoBehaviour, IInteractable
             Instantiate(_spawnItem, _spawnLocation.transform.position, _spawnLocation.transform.rotation);
             yield return new WaitForSeconds(.5f);
         }
-        Destroy(this);
     }
 }
