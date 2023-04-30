@@ -8,6 +8,9 @@ public class DoorHandler : MonoBehaviour, IInteractable
     [SerializeField]
     private Animator _myAnim;
 
+    [SerializeField]
+    private string _interactUi;
+
     void Start()
     {
         _myAnim = GetComponent<Animator>();
@@ -20,5 +23,10 @@ public class DoorHandler : MonoBehaviour, IInteractable
     public void revertBool()
     {
         _myAnim.SetBool("opening", false);
+    }
+
+    public string SendInteractUi()
+    {
+        return _interactUi;
     }
 }

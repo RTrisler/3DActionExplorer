@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PlayerManager : MonoBehaviour
 {
+
+    public static event Action<IInteractable> OnInteractionHit;
+    public static event Action OnInteractionNotHit;
     Animator animator;
     InputManager inputManager;
     CameraManager cameraManager;
@@ -75,6 +79,20 @@ public class PlayerManager : MonoBehaviour
         if (!isInteractingWithNPC)
         {
             inputManager.HandleAllInputs();
+        }
+        float interactDistance = 2f;
+        var interactPoint = this.transform.position + Vector3.up * .9f;
+        var rayLength = this.transform.forward * 2f;
+        if (Physics.Raycast(interactPoint, rayLength, out hit, interactDistance, InteractMask))
+        {
+            if (hit.transform.TryGetComponent<IInteractable>(out IInteractable interactor))
+            {
+                OnInteractionHit?.Invoke(interactor);
+            }
+        }
+        else
+        {
+            OnInteractionNotHit?.Invoke();
         }
     }
 

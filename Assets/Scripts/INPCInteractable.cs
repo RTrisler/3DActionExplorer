@@ -10,8 +10,16 @@ public class INPCInteractable : MonoBehaviour, IInteractable
     [SerializeField]
     private CameraManager _cameraManager;
 
+    [SerializeField]
+    private string _interactUi;
+
     public void Interact()
     {
 
+    }
+
+    public string SendInteractUi()
+    {
+        return _interactUi;
     }
 }

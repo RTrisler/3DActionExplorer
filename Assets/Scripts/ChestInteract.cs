@@ -11,6 +11,9 @@ public class ChestInteract : MonoBehaviour, IInteractable
     [SerializeField]
     private Transform _spawnLocation;
 
+    [SerializeField]
+    private string _interactUi;
+
     private Animator _chestAnimator;
 
     private bool _canInteract = true;
@@ -37,5 +40,13 @@ public class ChestInteract : MonoBehaviour, IInteractable
             Instantiate(_spawnItem, _spawnLocation.transform.position, _spawnLocation.transform.rotation);
             yield return new WaitForSeconds(.5f);
         }
+    }
+    public string SendInteractUi()
+    {
+        if (!_canInteract)
+        {
+            return "";
+        }
+        return _interactUi;
     }
 }

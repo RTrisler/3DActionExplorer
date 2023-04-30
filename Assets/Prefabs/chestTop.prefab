@@ -201,6 +201,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spawnItem: {fileID: 0}
   _spawnLocation: {fileID: 5463230769443843061}
+  _interactUi: Press E to open chest
 --- !u!1 &5463230769443843060
 GameObject:
   m_ObjectHideFlags: 0
