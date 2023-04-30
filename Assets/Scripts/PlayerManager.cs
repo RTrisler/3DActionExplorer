@@ -8,6 +8,7 @@ public class PlayerManager : MonoBehaviour
 
     public static event Action<IInteractable> OnInteractionHit;
     public static event Action OnInteractionNotHit;
+
     Animator animator;
     InputManager inputManager;
     CameraManager cameraManager;
@@ -52,11 +53,13 @@ public class PlayerManager : MonoBehaviour
             {
                 if (!isInteractingWithNPC)
                 {
+                    npcInteract.InteractNPC(this.transform);
+                    cameraManager.HandleAllCameraMovement();
                     isInteractingWithNPC = true;
-                    npcInteract.Interact();
                 }
                 else
                 {
+                    npcInteract.InteractNPC(this.transform);
                     isInteractingWithNPC = false;
                 }
             }

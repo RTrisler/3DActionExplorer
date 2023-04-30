@@ -35,6 +35,14 @@ public class CameraManager : MonoBehaviour
         cameraTransform = Camera.main.transform;
         defaultPosition = cameraTransform.localPosition.z;
     }
+    private void OnEnable()
+    {
+        INPCInteractable.OnNPCInteract += changeCameraAngle;
+    }
+    private void OnDisable()
+    {
+        INPCInteractable.OnNPCInteract -= changeCameraAngle;
+    }
 
     public void HandleAllCameraMovement()
     {
@@ -94,5 +102,12 @@ public class CameraManager : MonoBehaviour
 
         cameraVectorPosition.z = Mathf.Lerp(cameraTransform.localPosition.z, targetPosition, 0.2f);
         cameraTransform.localPosition = cameraVectorPosition;
+    }
+
+    private void changeCameraAngle(float lookAngle, float pivotAngle, Transform transform)
+    {
+        this.lookAngle = lookAngle;
+        this.pivotAngle = pivotAngle;
+        this.targetTransform = transform;
     }
 }
