@@ -38,7 +38,7 @@ public class BossBars : MonoBehaviour
                 _player = player;
                 _barsAnim.SetBool("bossAlive", true);
                 OnEnterBossRoom?.Invoke(_lookAngle, _pivotAngle, _cameraPosition);
-                _player.cameraManager.HandleAllCameraMovement();
+                _player.cameraManager.SnapCamera();
                 _player.isInteractingWithNPC = true;
             }
         }

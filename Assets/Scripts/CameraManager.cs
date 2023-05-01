@@ -53,6 +53,13 @@ public class CameraManager : MonoBehaviour
         HandleCameraCollisions();
     }
 
+    public void SnapCamera()
+    {
+        SnapCameraPosition();
+        RotateCamera();
+        HandleCameraCollisions();
+    }
+
     private void FollowTarget()
     {
         Vector3 targetPosition = Vector3.SmoothDamp
@@ -111,5 +118,9 @@ public class CameraManager : MonoBehaviour
         this.lookAngle = lookAngle;
         this.pivotAngle = pivotAngle;
         this.targetTransform = transform;
+    }
+    private void SnapCameraPosition()
+    {
+        this.transform.position = targetTransform.position;
     }
 }
