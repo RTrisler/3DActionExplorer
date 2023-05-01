@@ -38,10 +38,12 @@ public class CameraManager : MonoBehaviour
     private void OnEnable()
     {
         INPCInteractable.OnNPCInteract += changeCameraAngle;
+        BossBars.OnEnterBossRoom += changeCameraAngle;
     }
     private void OnDisable()
     {
         INPCInteractable.OnNPCInteract -= changeCameraAngle;
+        BossBars.OnEnterBossRoom -= changeCameraAngle;
     }
 
     public void HandleAllCameraMovement()

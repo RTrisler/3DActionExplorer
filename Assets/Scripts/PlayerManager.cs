@@ -11,7 +11,7 @@ public class PlayerManager : MonoBehaviour
 
     Animator animator;
     InputManager inputManager;
-    CameraManager cameraManager;
+    public CameraManager cameraManager;
     PlayerLocomotion playerLocomotion;
 
     public int score { get; set; }
