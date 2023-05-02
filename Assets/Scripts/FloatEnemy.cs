@@ -42,6 +42,7 @@ public class FloatEnemy : MonoBehaviour
         //Disable the enemy
         GetComponent<SphereCollider>().enabled = false;
         gameObject.SetActive(false);
+        this.enabled = false;
     }
 
     private void OnTriggerEnter(Collider other)
