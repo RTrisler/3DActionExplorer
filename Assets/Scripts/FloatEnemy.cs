@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 public class FloatEnemy : MonoBehaviour
 {
+    public int maxHealth = 100;
+    int currentHealth;
+
     private bool _isFiring;
     private bool _inRange;
     private PlayerManager _player;
@@ -16,6 +19,31 @@ public class FloatEnemy : MonoBehaviour
 
     [SerializeField]
     private Transform _firePoint;
+
+    void Start()
+    {
+        currentHealth = maxHealth;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        // play hurt animation
+        if(currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        Debug.Log("Enemy Died");
+        // Die Animation
+        //Disable the enemy
+        GetComponent<SphereCollider>().enabled = false;
+        gameObject.SetActive(false);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.TryGetComponent<PlayerManager>(out PlayerManager player))

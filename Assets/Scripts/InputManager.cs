@@ -11,6 +11,7 @@ public class InputManager : MonoBehaviour
     PlayerControls playerControls;
     PlayerLocomotion playerLocomotion;
     AnimatorManager animatorManager;
+    PlayerCombat playerCombat;
 
     public Vector2 movementInput;
     public Vector2 cameraInput;
@@ -27,11 +28,14 @@ public class InputManager : MonoBehaviour
     public bool jump_input;
     private bool _jumpCharging;
 
+    public bool attack_input;
+
 
     private void Awake()
     {
         animatorManager = GetComponent<AnimatorManager>();
         playerLocomotion = GetComponent<PlayerLocomotion>();
+        playerCombat = GetComponent<PlayerCombat>();
     }
 
     public void OnEnable()
@@ -48,6 +52,8 @@ public class InputManager : MonoBehaviour
             playerControls.PlayerActions.Jump.performed += StartJump;
             playerControls.PlayerActions.Jump.canceled += StopJump;
             playerControls.PlayerActions.Interact.performed += Interact_performed;
+
+            playerControls.PlayerActions.Attack.performed += i => attack_input = true;
         }
 
         playerControls.Enable();
@@ -76,6 +82,7 @@ public class InputManager : MonoBehaviour
         HandleMovementInput();
         HandleSprintingInput();
         HandleJumpInput();
+        HandleAttackInput();
         // Handle Action input ...
     }
 
@@ -112,6 +119,15 @@ public class InputManager : MonoBehaviour
         {
             jump_input = false;
             playerLocomotion.HandleJumping(0f);
+        }
+    }
+
+    private void HandleAttackInput()
+    {
+        if (attack_input)
+        {
+            attack_input = false;
+            playerCombat.HandleAttack();
         }
     }
 
