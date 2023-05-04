@@ -77,9 +77,10 @@ public class SoundManager : MonoBehaviour
         }
         else
         {
-            _soundEffect.volume -= _fadeSpeed;
+            Debug.Log("fading out");
+            _soundEffect.volume -= (_fadeSpeed);
             yield return new WaitForSeconds(.2f);
-            StartCoroutine(fadeSound());
+            StartCoroutine(fadeOut());
         }
     }
 }
