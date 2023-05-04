@@ -15,6 +15,8 @@ public class PlayerManager : MonoBehaviour
     public CameraManager cameraManager;
     PlayerLocomotion playerLocomotion;
 
+    public HealthBar healthBar;
+
     public int score { get; set; }
 
     [SerializeField]
@@ -33,6 +35,7 @@ public class PlayerManager : MonoBehaviour
     private void Start()
     {
         inputManager.OnInteractPressed += InputManager_OnInteractPressed;
+        healthBar.SetMaxHealth(health);
     }
 
     private void InputManager_OnInteractPressed(object sender, System.EventArgs e)
@@ -130,6 +133,7 @@ public class PlayerManager : MonoBehaviour
         if(other.TryGetComponent<IDamageAble>(out IDamageAble damage))
         {
             damage.Damage(this);
+            healthBar.SetHealth(health);
         }
     }
 }

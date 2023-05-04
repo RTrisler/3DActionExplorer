@@ -7,7 +7,7 @@ public class PlayerCombat : MonoBehaviour
     AnimatorManager animatorManager;
 
     [SerializeField]
-    private AudioClip _doorAudio;
+    private AudioClip _swordAudio;
 
     public Transform attackPoint;
     public float attackRange = 0.5f;
@@ -31,7 +31,7 @@ public class PlayerCombat : MonoBehaviour
     private void Attack()
     {
         animatorManager.PlayTargetAnimation("PlayerAttack", true);
-        SoundManager.Instance.playSoundQuick(_doorAudio);
+        SoundManager.Instance.playSoundQuick(_swordAudio);
         // Detect enemies in range of the attack
         Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
 
