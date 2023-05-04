@@ -15,6 +15,8 @@ public class PlayerManager : MonoBehaviour
     public CameraManager cameraManager;
     PlayerLocomotion playerLocomotion;
 
+    public ChangeScene sceneManager;
+
     public HealthBar healthBar;
 
     public int score { get; set; }
@@ -117,6 +119,11 @@ public class PlayerManager : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (health == 0)
+        {
+            sceneManager.MoveToScene(2);
+        }
+
         if (!isInteractingWithNPC)
         {
             cameraManager.HandleAllCameraMovement();
@@ -127,6 +134,8 @@ public class PlayerManager : MonoBehaviour
         playerLocomotion.isJumping = animator.GetBool("isJumping");
         animator.SetBool("isGrounded", playerLocomotion.isGrounded);
     }
+
+
 
     private void OnTriggerEnter(Collider other)
     {
