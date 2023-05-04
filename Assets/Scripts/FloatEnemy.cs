@@ -43,6 +43,8 @@ public class FloatEnemy : MonoBehaviour
     void Die()
     {
         Debug.Log("Enemy Died");
+        StopAllCoroutines();
+        Destroy(gameObject);
         // Die Animation
         //Disable the enemy
         GetComponent<SphereCollider>().enabled = false;
@@ -59,7 +61,9 @@ public class FloatEnemy : MonoBehaviour
             if (!_isFiring)
             {
                 _isFiring = true;
-                MoveTowardsPlayer(_lookTime);
+                //MoveTowardsPlayer(_lookTime);
+                var end = Time.time + 3f;
+                StartCoroutine(MoveTowardsP(end));
             }
         }
     }
@@ -92,4 +96,24 @@ public class FloatEnemy : MonoBehaviour
         _isFiring = false;
         Debug.Log("Task finished");
     }
+    IEnumerator MoveTowardsP(float duration)
+    {
+        var move = 4f * Time.deltaTime;
+        while (Time.time < duration)
+        {
+            var targetDirection = _player.collectPoint.transform.position - this.transform.position;
+            var newLookDirection = Vector3.RotateTowards(this.transform.forward, targetDirection, move, 0f);
+            this.transform.rotation = Quaternion.LookRotation(newLookDirection);
+            yield return new WaitForSeconds(.01f);
+        }
+        Instantiate(_myProj, _firePoint.transform.position, _firePoint.transform.rotation);
+        if (_inRange)
+        {
+            duration = Time.time + 3f;
+            StartCoroutine(MoveTowardsP(duration));
+        }
+        _isFiring = false;
+        StopCoroutine(MoveTowardsP(duration));
+    }
 }
+
