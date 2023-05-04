@@ -7,6 +7,9 @@ public class Turbine : MonoBehaviour
     [SerializeField]
     private float _pushForce;
 
+    [SerializeField]
+    private AudioClip _windAudio;
+
     private void OnTriggerStay(Collider other)
     {
         if(other.TryGetComponent<PlayerLocomotion>(out PlayerLocomotion locomotion))
@@ -14,4 +17,19 @@ public class Turbine : MonoBehaviour
             locomotion.playerRigidBody.AddForce(this.transform.forward * _pushForce);
         }
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.TryGetComponent<PlayerManager>(out PlayerManager player))
+        {
+            SoundManager.Instance.playSoundFadeIn(_windAudio);
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.TryGetComponent<PlayerManager>(out PlayerManager player))
+        {
+            SoundManager.Instance.fadeSoundOut();
+        }
+    }
+
 }

@@ -11,6 +11,9 @@ public class SoundManager : MonoBehaviour
     [SerializeField]
     private AudioSource _gameMusic;
 
+    [SerializeField]
+    private float _fadeSpeed;
+
     private void OnEnable()
     {
         Instance = this;
@@ -42,5 +45,41 @@ public class SoundManager : MonoBehaviour
     {
         _soundEffect.clip = fadeAudio;
         _soundEffect.volume = 0;
+        _soundEffect.Play();
+        StartCoroutine(fadeSound());
+    }
+
+    public void fadeSoundOut()
+    {
+        StartCoroutine(fadeOut());
+    }
+
+    IEnumerator fadeSound()
+    {
+        if(_soundEffect.volume == .5)
+        {
+            StopAllCoroutines();
+        }
+        else
+        {
+            Debug.Log(_soundEffect.volume);
+            _soundEffect.volume += _fadeSpeed;
+            yield return new WaitForSeconds(.2f);
+            StartCoroutine(fadeSound());
+        }
+    }
+
+    IEnumerator fadeOut()
+    {
+        if (_soundEffect.volume == 0)
+        {
+            StopAllCoroutines();
+        }
+        else
+        {
+            _soundEffect.volume -= _fadeSpeed;
+            yield return new WaitForSeconds(.2f);
+            StartCoroutine(fadeSound());
+        }
     }
 }
