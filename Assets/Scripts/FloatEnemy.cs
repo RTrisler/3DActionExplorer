@@ -42,6 +42,7 @@ public class FloatEnemy : MonoBehaviour
 
     void Die()
     {
+        Destroy(gameObject);
         Debug.Log("Enemy Died");
         // Die Animation
         //Disable the enemy

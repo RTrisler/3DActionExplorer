@@ -6,6 +6,7 @@ using System;
 public class ScoreCollect : MonoBehaviour, IPickupable
 {
     public static event Action<STEP> OnSTEPCollect;
+    public static event Action<int> OnScoreCollect;
     private bool _inRange;
     private PlayerManager _player;
     private Rigidbody _collectBody;
@@ -30,6 +31,7 @@ public class ScoreCollect : MonoBehaviour, IPickupable
         OnSTEPCollect?.Invoke(_step);
         Instantiate(_myParticles, transform.position, transform.rotation);
         playerManager.score += _scoreValue;
+        OnScoreCollect?.Invoke(playerManager.score);
         Destroy(gameObject);
     }
 

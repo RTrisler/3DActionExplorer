@@ -7,11 +7,13 @@ public class NewSTEPManager : MonoBehaviour
     private PlayerManager _playerManager;
     private PlayerLocomotion _playerMovement;
     private InputManager _playerInput;
+    private PlayerCombat _playerCombat;
     private void Start()
     {
         _playerManager = GetComponent<PlayerManager>();
         _playerMovement = GetComponent<PlayerLocomotion>();
         _playerInput = GetComponent<InputManager>();
+        _playerCombat = GetComponent<PlayerCombat>();
     }
     private void OnEnable()
     {
@@ -41,7 +43,7 @@ public class NewSTEPManager : MonoBehaviour
                 break;
             case STEP.P:
                 Debug.Log("P collected");
-                //give the player more attack power
+                _playerCombat.attackDamage += 25;
                 break;
             default:
                 break;

@@ -7,6 +7,7 @@ public class PlayerManager : MonoBehaviour
 {
 
     public static event Action<IInteractable> OnInteractionHit;
+    public static event Action<SpecialDoor> OnSpecialInteractionHit;
     public static event Action OnInteractionNotHit;
 
     Animator animator;
@@ -91,6 +92,10 @@ public class PlayerManager : MonoBehaviour
             if (hit.transform.TryGetComponent<IInteractable>(out IInteractable interactor))
             {
                 OnInteractionHit?.Invoke(interactor);
+            }
+            if(hit.transform.TryGetComponent<SpecialDoor>(out SpecialDoor specialDoor))
+            {
+                OnSpecialInteractionHit?.Invoke(specialDoor);
             }
         }
         else
