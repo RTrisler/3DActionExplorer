@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System.Threading.Tasks;
 
 public class FloatEnemy : MonoBehaviour
 {
     public int maxHealth = 100;
-    int currentHealth;
+    public int currentHealth;
+
+    public Slider healthSlider;
 
     private bool _isFiring;
     private bool _inRange;
@@ -23,11 +26,13 @@ public class FloatEnemy : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
+        healthSlider.maxValue = maxHealth;
     }
 
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
+        healthSlider.value += damage;
         // play hurt animation
         if(currentHealth <= 0)
         {
