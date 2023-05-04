@@ -560,7 +560,7 @@ PrefabInstance:
     - target: {fileID: 11031348939378990, guid: cafa8c651c96a564595ead4668295bb4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -40.62
+      value: -5.04
       objectReference: {fileID: 0}
     - target: {fileID: 11031348939378990, guid: cafa8c651c96a564595ead4668295bb4,
         type: 3}
@@ -4499,7 +4499,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9960785, g: 0.21960786, b: 0.3372549, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5836,7 +5836,7 @@ GameObject:
   - component: {fileID: 598634526}
   - component: {fileID: 598634525}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Heart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5851,15 +5851,15 @@ RectTransform:
   m_GameObject: {fileID: 598634523}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.0262097, y: 1.0262097, z: 1.0262097}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1991159004}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 0.69999695, y: 0.9}
   m_SizeDelta: {x: 13, y: 12}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &598634525
@@ -5882,7 +5882,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: d76eb89492c17244e86043ea98a55e36, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8887,6 +8887,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraManager: {fileID: 0}
+  healthBar: {fileID: 0}
   health: 100
   InteractMask:
     serializedVersion: 2
@@ -15071,7 +15072,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9960785, g: 0.23137257, b: 0.34509805, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -17659,7 +17660,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraManager: {fileID: 0}
-  health: 0
+  healthBar: {fileID: 1991159006}
+  health: 100
   InteractMask:
     serializedVersion: 2
     m_Bits: 384
@@ -18893,6 +18895,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1991159004}
   - component: {fileID: 1991159005}
+  - component: {fileID: 1991159006}
   m_Layer: 5
   m_Name: HealthBar
   m_TagString: Untagged
@@ -18909,8 +18912,8 @@ RectTransform:
   m_GameObject: {fileID: 1991159003}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 432870298}
   - {fileID: 1625808015}
@@ -18918,10 +18921,10 @@ RectTransform:
   m_Father: {fileID: 1019902175}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.1574, y: -0.1691}
-  m_SizeDelta: {x: 51.6851, y: 8.6617}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 100.3, y: 25.6}
+  m_SizeDelta: {x: 51.68509, y: 8.661697}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1991159005
 MonoBehaviour:
@@ -18968,12 +18971,25 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 100
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1991159006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1991159003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 589029834f91e524e9a7bf1bb7f350cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 1991159005}
 --- !u!1 &1997728139 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 977d2ea612a150442a3f028dec3d1ff8,
