@@ -11,6 +11,9 @@ public class DoorHandler : MonoBehaviour, IInteractable
     [SerializeField]
     private string _interactUi;
 
+    [SerializeField]
+    private AudioClip _doorAudio;
+
     void Start()
     {
         _myAnim = GetComponent<Animator>();
@@ -29,4 +32,10 @@ public class DoorHandler : MonoBehaviour, IInteractable
     {
         return _interactUi;
     }
+
+    private void playAudio()
+    {
+        SoundManager.Instance.playSoundQuick(_doorAudio);
+    }
+
 }

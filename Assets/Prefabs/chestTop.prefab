@@ -202,6 +202,7 @@ MonoBehaviour:
   _spawnItem: {fileID: 0}
   _spawnLocation: {fileID: 5463230769443843061}
   _interactUi: Press E to open chest
+  _chestAudio: {fileID: 8300000, guid: dd8d73c3e985acb45bac0aca7ffa87cd, type: 3}
 --- !u!1 &5463230769443843060
 GameObject:
   m_ObjectHideFlags: 0

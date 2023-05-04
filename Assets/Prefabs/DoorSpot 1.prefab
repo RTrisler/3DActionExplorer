@@ -181,3 +181,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _myAnim: {fileID: 0}
   _interactUi: Press E to open door
+  _doorAudio: {fileID: 8300000, guid: 3b2c6c8a093b3f247bd36b88516ad57d, type: 3}

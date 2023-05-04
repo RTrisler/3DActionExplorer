@@ -14,6 +14,9 @@ public class ChestInteract : MonoBehaviour, IInteractable
     [SerializeField]
     private string _interactUi;
 
+    [SerializeField]
+    private AudioClip _chestAudio;
+
     private Animator _chestAnimator;
 
     private bool _canInteract = true;
@@ -28,6 +31,7 @@ public class ChestInteract : MonoBehaviour, IInteractable
         if (_canInteract)
         {
             _chestAnimator.SetBool("opening", true);
+            SoundManager.Instance.playSoundQuick(_chestAudio);
         }
     }
 

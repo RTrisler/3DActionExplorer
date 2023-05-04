@@ -187,3 +187,4 @@ MonoBehaviour:
   _lookAngle: -123
   _pivotAngle: 8
   _enterTrigger: {fileID: 6544171460061000652}
+  _barsAudio: {fileID: 8300000, guid: 4624b150a2227144cb7d51e873ad59e9, type: 3}

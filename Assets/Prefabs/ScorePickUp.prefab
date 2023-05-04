@@ -586,3 +586,5 @@ MonoBehaviour:
   _myParticles: {fileID: 2643096786992224916, guid: deef7190741e9764884250a1120d87b8,
     type: 3}
   _scoreValue: 5
+  _collectAudio: {fileID: 8300000, guid: 1148eace1ace41441bba8254fd6c3d1e, type: 3}
+  _audioVolume: 0.3

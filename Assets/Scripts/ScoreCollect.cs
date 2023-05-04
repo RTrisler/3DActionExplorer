@@ -13,8 +13,15 @@ public class ScoreCollect : MonoBehaviour, IPickupable
 
     [SerializeField]
     private int _scoreValue;
+
+    [SerializeField]
+    private AudioClip _collectAudio;
+
+    [SerializeField]
+    private float _audioVolume;
     public void collect(PlayerManager playerManager)
     {
+        SoundManager.Instance.playSoundQuick(_collectAudio, _audioVolume);
         Instantiate(_myParticles, transform.position, transform.rotation);
         playerManager.score += _scoreValue;
         Destroy(gameObject);

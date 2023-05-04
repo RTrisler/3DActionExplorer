@@ -23,6 +23,9 @@ public class BossBars : MonoBehaviour
 
     [SerializeField]
     private BoxCollider _enterTrigger;
+
+    [SerializeField]
+    private AudioClip _barsAudio;
     void Start()
     {
         _barsAnim = GetComponent<Animator>();
@@ -36,6 +39,7 @@ public class BossBars : MonoBehaviour
             {
                 _hasOpened = true;
                 _player = player;
+                SoundManager.Instance.playSoundQuick(_barsAudio);
                 _barsAnim.SetBool("bossAlive", true);
                 OnEnterBossRoom?.Invoke(_lookAngle, _pivotAngle, _cameraPosition);
                 _player.cameraManager.SnapCamera();
