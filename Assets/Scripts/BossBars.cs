@@ -26,6 +26,14 @@ public class BossBars : MonoBehaviour
 
     [SerializeField]
     private AudioClip _barsAudio;
+    private void OnEnable()
+    {
+        ScoreCollect.OnSTEPCollect += LowerBars;
+    }
+    private void OnDisable()
+    {
+        ScoreCollect.OnSTEPCollect -= LowerBars;
+    }
     void Start()
     {
         _barsAnim = GetComponent<Animator>();
@@ -53,5 +61,16 @@ public class BossBars : MonoBehaviour
         OnEnterBossRoom?.Invoke(_lookAngle, _pivotAngle, _player.transform);
         _player.isInteractingWithNPC = false;
         _enterTrigger.enabled = false;
+    }
+
+    private void LowerBars(STEP stepFound)
+    {
+        if (_hasOpened && !(stepFound == STEP.None))    
+        {
+            _barsAnim.SetBool("bossAlive", false);
+            OnEnterBossRoom?.Invoke(_lookAngle, _pivotAngle, _cameraPosition);
+            _player.cameraManager.SnapCamera();
+            _player.isInteractingWithNPC = true;
+        }
     }
 }

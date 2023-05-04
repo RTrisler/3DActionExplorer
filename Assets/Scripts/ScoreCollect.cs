@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class ScoreCollect : MonoBehaviour, IPickupable
 {
+    public static event Action<STEP> OnSTEPCollect;
     private bool _inRange;
     private PlayerManager _player;
     private Rigidbody _collectBody;
@@ -19,9 +21,13 @@ public class ScoreCollect : MonoBehaviour, IPickupable
 
     [SerializeField]
     private float _audioVolume;
+
+    [SerializeField]
+    private STEP _step;
     public void collect(PlayerManager playerManager)
     {
         SoundManager.Instance.playSoundQuick(_collectAudio, _audioVolume);
+        OnSTEPCollect?.Invoke(_step);
         Instantiate(_myParticles, transform.position, transform.rotation);
         playerManager.score += _scoreValue;
         Destroy(gameObject);

@@ -29,6 +29,7 @@ public class InputManager : MonoBehaviour
     private bool _jumpCharging;
 
     public bool attack_input;
+    public bool _canSprint = false;
 
 
     private void Awake()
@@ -103,7 +104,7 @@ public class InputManager : MonoBehaviour
 
     private void HandleSprintingInput()
     {
-        if (sprint_input && moveAmount > 0.5f)
+        if (sprint_input && moveAmount > 0.5f && _canSprint)
         {
             playerLocomotion.isSprinting = true;
         }

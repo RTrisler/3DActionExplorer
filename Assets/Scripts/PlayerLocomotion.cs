@@ -97,7 +97,6 @@ public class PlayerLocomotion : MonoBehaviour
         {
             currentMovementState = MovementState.Charging;
         }
-        stepManager.HandleStepState(currentMovementState, this, playerManager);
         playerRigidBody.velocity = movementVelocity;
     }
 
@@ -161,6 +160,7 @@ public class PlayerLocomotion : MonoBehaviour
 
     public void HandleJumping(float jumpCharge)
     {
+        Debug.Log(_extendedJump);
         if(jumpCharge > 5)
         {
             jumpCharge = 5;
@@ -199,15 +199,15 @@ public class PlayerLocomotion : MonoBehaviour
 
     public void SpeedUpMovement()
     {
-        walkingSpeed += 5f;
-        runningSpeed += 5f;
-        sprintingSpeed += 5f;
+        walkingSpeed += 1f;
+        runningSpeed += 1f;
+        sprintingSpeed += 1f;
     }
 
     public void SlowDownMovement()
     {
-        walkingSpeed -= 5f;
-        runningSpeed -= 5f;
-        sprintingSpeed -= 5f;
+        walkingSpeed -= 3f;
+        runningSpeed -= 3f;
+        sprintingSpeed -= 3f;
     }
 }

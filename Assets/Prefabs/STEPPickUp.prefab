@@ -95,6 +95,7 @@ MonoBehaviour:
   _scoreValue: 5
   _collectAudio: {fileID: 8300000, guid: 1148eace1ace41441bba8254fd6c3d1e, type: 3}
   _audioVolume: 0.3
+  _step: 1
 --- !u!1 &336480309565369501
 GameObject:
   m_ObjectHideFlags: 0
