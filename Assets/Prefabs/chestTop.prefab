@@ -199,7 +199,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dba96e91526d08a40accb49bfa8cc558, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnItem: {fileID: 0}
+  _spawnItem: {fileID: 6299874624539249182, guid: 9a5447aae65ab194b806538e4d1e322a,
+    type: 3}
   _spawnLocation: {fileID: 5463230769443843061}
   _interactUi: Press E to open chest
   _chestAudio: {fileID: 8300000, guid: dd8d73c3e985acb45bac0aca7ffa87cd, type: 3}

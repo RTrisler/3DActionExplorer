@@ -25,7 +25,7 @@ public class PlayerLocomotion : MonoBehaviour
     public bool isGrounded;
     public bool isJumping;
 
-    private bool _extendedJump = true;
+    public bool _extendedJump = false;
 
     [Header("Movement Speeds")]
     public float walkingSpeed = 1.5f;

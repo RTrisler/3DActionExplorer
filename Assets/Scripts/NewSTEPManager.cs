@@ -5,9 +5,11 @@ using UnityEngine;
 public class NewSTEPManager : MonoBehaviour
 {
     private PlayerManager _playerManager;
+    private PlayerLocomotion _playerMovement;
     private void Start()
     {
         _playerManager = GetComponent<PlayerManager>();
+        _playerMovement = GetComponent<PlayerLocomotion>();
     }
     private void OnEnable()
     {
@@ -23,13 +25,13 @@ public class NewSTEPManager : MonoBehaviour
         switch (addedStep)
         {
             case STEP.S:
-                //increase speed and allow sprinting
+                _playerMovement.SpeedUpMovement();
                 break;
             case STEP.T:
-                //allow player to do super jump
+                _playerMovement._extendedJump = true;
                 break;
             case STEP.E:
-                //allow player to enter speical rooms
+                _playerManager._canInteractSpecial = true;
                 break;
             case STEP.P:
                 //give the player more attack power
