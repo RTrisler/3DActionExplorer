@@ -21,6 +21,7 @@ public class Turbine : MonoBehaviour
     {
         if(other.TryGetComponent<PlayerManager>(out PlayerManager player))
         {
+            Debug.Log("Enterd trigger");
             SoundManager.Instance.playSoundFadeIn(_windAudio);
         }
     }
@@ -28,6 +29,7 @@ public class Turbine : MonoBehaviour
     {
         if (other.TryGetComponent<PlayerManager>(out PlayerManager player))
         {
+            Debug.Log("Exit trigger");
             SoundManager.Instance.fadeSoundOut();
         }
     }
