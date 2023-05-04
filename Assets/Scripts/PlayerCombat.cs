@@ -5,11 +5,16 @@ using UnityEngine;
 public class PlayerCombat : MonoBehaviour
 {
     AnimatorManager animatorManager;
+
+    [SerializeField]
+    private AudioClip _doorAudio;
+
     public Transform attackPoint;
     public float attackRange = 0.5f;
     public LayerMask enemyLayers;
 
     public int attackDamage = 40;
+
 
     // Update is called once per frame
     private void Awake()
@@ -26,6 +31,7 @@ public class PlayerCombat : MonoBehaviour
     private void Attack()
     {
         animatorManager.PlayTargetAnimation("PlayerAttack", true);
+        SoundManager.Instance.playSoundQuick(_doorAudio);
         // Detect enemies in range of the attack
         Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
 
