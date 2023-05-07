@@ -8,12 +8,14 @@ public class PlayerManager : MonoBehaviour
 
     public static event Action<IInteractable> OnInteractionHit;
     public static event Action<SpecialDoor> OnSpecialInteractionHit;
+    public static event Action OnDeathBox;
+    public static event Action OnPlayerMoved;
     public static event Action OnInteractionNotHit;
 
     Animator animator;
     InputManager inputManager;
     public CameraManager cameraManager;
-    PlayerLocomotion playerLocomotion;
+    public PlayerLocomotion playerLocomotion;
 
     public ChangeScene sceneManager;
 
@@ -33,6 +35,8 @@ public class PlayerManager : MonoBehaviour
     public bool _canInteractSpecial = false;
 
     private RaycastHit hit;
+    private DeathBox _deathBox;
+    private bool _dying;
 
     private void Start()
     {
@@ -81,6 +85,15 @@ public class PlayerManager : MonoBehaviour
         inputManager = GetComponent<InputManager>();
         cameraManager = FindObjectOfType<CameraManager>();
         playerLocomotion = GetComponent<PlayerLocomotion>();
+    }
+
+    private void OnEnable()
+    {
+        UiManager.DoneFading += movePlayer;
+    }
+    private void OnDisable()
+    {
+        UiManager.DoneFading -= movePlayer;
     }
 
     private void Update()
@@ -144,5 +157,21 @@ public class PlayerManager : MonoBehaviour
             damage.Damage(this);
             healthBar.SetHealth(health);
         }
+        if(other.TryGetComponent<DeathBox>(out DeathBox death))
+        {
+            if (!_dying)
+            {
+                OnDeathBox?.Invoke();
+                _deathBox = death;
+                _dying = true;
+            }
+        }
+    }
+
+    void movePlayer()
+    {
+        _deathBox.movePlayer(this);
+        OnPlayerMoved?.Invoke();
+        _dying = false;
     }
 }
