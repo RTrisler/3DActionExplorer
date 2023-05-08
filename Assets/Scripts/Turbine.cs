@@ -18,7 +18,7 @@ public class Turbine : MonoBehaviour
         }
         if(other.TryGetComponent<PuzzleBall>(out PuzzleBall ball))
         {
-            ball._ballRigidBody.AddForce(this.transform.forward * 30);
+            ball._ballRigidBody.AddForce(-1 * (this.transform.right * 5));
         }
     }
     private void OnTriggerEnter(Collider other)

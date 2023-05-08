@@ -9,14 +9,25 @@ public class FanTurn : MonoBehaviour
 
     private bool _turning;
 
+    [SerializeField]
+    private Animator _button;
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.TryGetComponent<PlayerManager>(out PlayerManager player))
         {
             if (!_turning)
             {
+                _button.SetBool("onButton", true);
                 StartCoroutine(turn());
             }
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.TryGetComponent<PlayerManager>(out PlayerManager player))
+        {
+            _button.SetBool("onButton", false);
         }
     }
     IEnumerator turn()
