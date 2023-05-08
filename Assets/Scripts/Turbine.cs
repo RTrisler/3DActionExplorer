@@ -16,6 +16,10 @@ public class Turbine : MonoBehaviour
         {
             locomotion.playerRigidBody.AddForce(this.transform.forward * _pushForce);
         }
+        if(other.TryGetComponent<PuzzleBall>(out PuzzleBall ball))
+        {
+            ball._ballRigidBody.AddForce(this.transform.forward * 30);
+        }
     }
     private void OnTriggerEnter(Collider other)
     {
