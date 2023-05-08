@@ -4,11 +4,20 @@ using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
 {
+    Animator anim;
     AnimatorManager animatorManager;
 
     [SerializeField]
     private AudioClip _swordAudio;
+    [SerializeField]
+    Weapon weapon;
 
+    public List<AttackSO> combo;
+    float lastClickedTime;
+    float lastComboEnd;
+    int comboCounter;
+
+    // old vars
     public Transform attackPoint;
     public float attackRange = 0.5f;
     public LayerMask enemyLayers;
@@ -21,6 +30,12 @@ public class PlayerCombat : MonoBehaviour
     {
         // Play attack animation
         animatorManager = GetComponent<AnimatorManager>();
+        anim = GetComponent<Animator>();
+    }
+
+    private void Update()
+    {
+        ExitAttack();
     }
 
     public void HandleAttack()
@@ -30,18 +45,42 @@ public class PlayerCombat : MonoBehaviour
 
     private void Attack()
     {
-        animatorManager.PlayTargetAnimation("PlayerAttack", true);
-        SoundManager.Instance.playSoundQuick(_swordAudio);
-        // Detect enemies in range of the attack
-        Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
 
-        // Damage Enemy
-        foreach(Collider enemy in hitEnemies)
+        if (Time.time - lastComboEnd > 0.2f && comboCounter <= combo.Count)
         {
-            Debug.Log("Hit enemy: " + enemy.name);
-            if (enemy.GetComponent<FloatEnemy>() != null)
-                enemy.GetComponent<FloatEnemy>().TakeDamage(attackDamage);
+            CancelInvoke("EndCombo");
+
+            if (Time.time - lastClickedTime >= 0.5f)
+            {
+                anim.runtimeAnimatorController = combo[comboCounter].animatorOV;
+                anim.Play("Attack",0,0);
+                SoundManager.Instance.playSoundQuick(_swordAudio);
+                weapon.damage = combo[comboCounter].damage;
+                comboCounter++;
+                lastClickedTime = Time.time;
+
+                if (comboCounter + 1 > combo.Count)
+                {
+                    comboCounter = 0;
+                }
+            }
         }
+
+    }
+
+    public void ExitAttack()
+    {
+        if(anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.9 && anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
+        {
+            Debug.Log("Exit Attack");
+            Invoke("EndCombo", 1);
+        }
+    }
+
+    void EndCombo()
+    {
+        comboCounter = 0;
+        lastComboEnd = Time.time;
     }
 
     void OnDrawGizmosSelected() {
