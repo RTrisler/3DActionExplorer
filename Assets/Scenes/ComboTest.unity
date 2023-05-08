@@ -15283,6 +15283,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 08ec6a0dea418f9478f2bba5762e5284, type: 3}
+--- !u!1 &1286124332 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1452914032934329006, guid: 77c5b92b20b170a4893919b99e4a82bf,
+    type: 3}
+  m_PrefabInstance: {fileID: 1154917656}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1291591055
 GameObject:
   m_ObjectHideFlags: 0
@@ -19217,6 +19223,32 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1154917656}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1747458307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1286124332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5470eb88150913499e55f6fad2d6a27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+--- !u!65 &1747458308
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1286124332}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.00038240498, y: 0.0010129375, z: 0.01686742}
+  m_Center: {x: 2.2379304e-10, y: 0.000028737419, z: 0.0077499235}
 --- !u!1001 &1749338857
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20947,6 +20979,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _swordAudio: {fileID: 8300000, guid: cb0adb1efe8ee30428f7e00aefffdaf9, type: 3}
+  weapon: {fileID: 1747458307}
+  combo:
+  - {fileID: 11400000, guid: 8e8a6012097f63f4e980d9795ad89602, type: 2}
+  - {fileID: 11400000, guid: 5397b170f6e8a3045bef473e0096e98b, type: 2}
+  - {fileID: 11400000, guid: 797fe02c481c0854a97535a478857e4e, type: 2}
   attackPoint: {fileID: 1731153761}
   attackRange: 0.5
   enemyLayers:
