@@ -15,9 +15,8 @@ public class PlayerCombat : MonoBehaviour
     public List<AttackSO> combo;
     float lastClickedTime;
     float lastComboEnd;
-    int comboCounter;
+    int comboCounter = 0;
 
-    // old vars
     public Transform attackPoint;
     public float attackRange = 0.5f;
     public LayerMask enemyLayers;
@@ -50,12 +49,22 @@ public class PlayerCombat : MonoBehaviour
         {
             CancelInvoke("EndCombo");
 
-            if (Time.time - lastClickedTime >= 0.5f)
+            if (Time.time - lastClickedTime >= 0.2f)
             {
                 anim.runtimeAnimatorController = combo[comboCounter].animatorOV;
                 anim.Play("Attack",0,0);
                 SoundManager.Instance.playSoundQuick(_swordAudio);
                 weapon.damage = combo[comboCounter].damage;
+                // Detect enemies in range of the attack
+                Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
+
+                // Damage Enemy
+                foreach(Collider enemy in hitEnemies)
+                {
+                    Debug.Log("Hit enemy: " + enemy.name);
+                    if (enemy.GetComponent<FloatEnemy>() != null)
+                        enemy.GetComponent<FloatEnemy>().TakeDamage(weapon.damage);
+                }
                 comboCounter++;
                 lastClickedTime = Time.time;
 
@@ -73,6 +82,7 @@ public class PlayerCombat : MonoBehaviour
         if(anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.9 && anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
         {
             Debug.Log("Exit Attack");
+            comboCounter = 0;
             Invoke("EndCombo", 1);
         }
     }
