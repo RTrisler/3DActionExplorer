@@ -44,8 +44,8 @@ public class PlayerCombat : MonoBehaviour
 
     private void Attack()
     {
-
-        if (Time.time - lastComboEnd > 0.5f && comboCounter <= combo.Count)
+        Debug.Log("Combo Counter: " + comboCounter);
+        if (Time.time - lastComboEnd > 1.0f && comboCounter <= combo.Count)
         {
             CancelInvoke("EndCombo");
 
