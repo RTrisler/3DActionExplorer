@@ -11,9 +11,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: f736e2d8531f9d648908cab7b06ddf32
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/NathanScene.unity
     guid: 70c7dbe6ebc51ee49b054fd4b993e16a
+  - enabled: 1
+    path: Assets/Scenes/IntegrationTest.unity
+    guid: d7414861c8f244a47836fb3a63a45255
   - enabled: 1
     path: Assets/Scenes/MainMenu 1.unity
     guid: 389e2391221ed9e4e9072e978b638147

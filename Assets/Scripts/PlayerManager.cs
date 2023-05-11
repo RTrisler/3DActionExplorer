@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using HighScore;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -134,6 +135,7 @@ public class PlayerManager : MonoBehaviour
     {
         if (health == 0)
         {
+            HS.SubmitHighScore(this, "Reid", score);
             sceneManager.MoveToScene(2);
         }
 
