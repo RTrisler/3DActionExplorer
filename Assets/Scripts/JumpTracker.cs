@@ -7,5 +7,8 @@ public class JumpTracker : MonoBehaviour
     [SerializeField]
     private List<GameObject> _floatEnemies;
 
-
+    private void Update()
+    {
+        
+    }
 }
