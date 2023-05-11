@@ -67,6 +67,7 @@ public class BossBars : MonoBehaviour
     {
         if (_hasOpened && !(stepFound == STEP.None))    
         {
+            _hasOpened = false;
             _barsAnim.SetBool("bossAlive", false);
             OnEnterBossRoom?.Invoke(_lookAngle, _pivotAngle, _cameraPosition);
             _player.cameraManager.SnapCamera();

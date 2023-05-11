@@ -21,6 +21,9 @@ public class UiManager : MonoBehaviour
     [SerializeField]
     private Image _blackOut;
 
+    [SerializeField]
+    private GameObject _dialogue;
+
     private string S = "";
     private string T = "";
     private string E = "";
@@ -38,6 +41,7 @@ public class UiManager : MonoBehaviour
         PlayerManager.OnDeathBox += fadeIn;
         ScoreCollect.OnScoreCollect += addScore;
         ScoreCollect.OnSTEPCollect += updateSTEPUi;
+        ScoreCollect.OnSTEPCollect += showSTEPability;
     }
     private void OnDisable()
     {
@@ -48,6 +52,12 @@ public class UiManager : MonoBehaviour
         ScoreCollect.OnScoreCollect -= addScore;
         ScoreCollect.OnSTEPCollect -= updateSTEPUi;
         PlayerManager.OnSpecialInteractionHit -= changeSpecialInteractionUi;
+        ScoreCollect.OnSTEPCollect -= showSTEPability;
+    }
+
+    private void Start()
+    {
+        _dialogue.SetActive(false);
     }
 
     private void changeInteractionUi(IInteractable interaction)
@@ -110,6 +120,11 @@ public class UiManager : MonoBehaviour
         _STEPUi.text = S + T + E + P;
     }
 
+    private void showSTEPability(STEP stepState)
+    {
+        StartCoroutine(showSTEP(stepState));
+    }
+
     private void fadeIn()
     {
         StartCoroutine(fadeToBlack());
@@ -154,5 +169,30 @@ public class UiManager : MonoBehaviour
         {
             StopAllCoroutines();
         }
+    }
+
+    IEnumerator showSTEP(STEP stepGained)
+    {
+        _dialogue.SetActive(true);
+        var textMeshPro = _dialogue.GetComponentInChildren<TextMeshProUGUI>();
+        string STEPDialogue = "";
+        switch (stepGained)
+        {
+            case STEP.S:
+                STEPDialogue = "You've gained S, you can now sprint with SHIFT and have increased movement speed!";
+                break;
+            case STEP.T:
+                STEPDialogue = "You've gained T, you can now charge your jump by holding down the jump button!";
+                break;
+            case STEP.E:
+                STEPDialogue = "You've gained E, you can now open special doors!";
+                break;
+            case STEP.P:
+                STEPDialogue = "You've gained P, your attack power is increased!";
+                break;
+        }
+        textMeshPro.text = STEPDialogue;
+        yield return new WaitForSeconds(5);
+        _dialogue.SetActive(false);
     }
 }
