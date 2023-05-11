@@ -8,8 +8,16 @@ using TMPro;
 
 public class ScoreManager : MonoBehaviour
 {
-    public GameObject canvas;
     public TMP_InputField inputPlayerName;
+    public TMP_Text scoreText;
+    string scoreKey = "Score";
+    int score;
+
+    public void Start()
+    {
+      score = PlayerPrefs.GetInt(scoreKey);
+      scoreText.text = "Score: " + score + "";
+    }
 
     public void InitGame() {
     // Read the comment for this HS.Init method .
@@ -21,15 +29,11 @@ public class ScoreManager : MonoBehaviour
     HS.Init(this, "TEAM 5"); // you can hard code your game's name
   }
 
-    public void SubmitScore(int score)
+    public void SubmitScore()
     {
         Debug.Log("Submitting Score");
+        InitGame();
         HS.SubmitHighScore(this, inputPlayerName.text, score);
-    }
-
-    public void setName()
-    {
-        
     }
 
 }

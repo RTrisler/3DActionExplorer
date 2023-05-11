@@ -22,6 +22,7 @@ public class PlayerManager : MonoBehaviour
 
     public HealthBar healthBar;
 
+    string scoreKey = "Score";
     public int score { get; set; }
 
     [SerializeField]
@@ -133,9 +134,9 @@ public class PlayerManager : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (health == 0)
+        if (health <= 0)
         {
-            HS.SubmitHighScore(this, "Reid", score);
+            SetScore(score);
             sceneManager.MoveToScene(2);
         }
 
@@ -168,6 +169,11 @@ public class PlayerManager : MonoBehaviour
                 _dying = true;
             }
         }
+    }
+
+    public void SetScore(int score)
+    {
+        PlayerPrefs.SetInt(scoreKey, score);
     }
 
     void movePlayer()
