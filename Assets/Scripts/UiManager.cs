@@ -173,7 +173,14 @@ public class UiManager : MonoBehaviour
 
     IEnumerator showSTEP(STEP stepGained)
     {
-        _dialogue.SetActive(true);
+        if(stepGained == STEP.None)
+        {
+            _dialogue.SetActive(false);
+        }
+        else
+        {
+            _dialogue.SetActive(true);
+        }
         var textMeshPro = _dialogue.GetComponentInChildren<TextMeshProUGUI>();
         string STEPDialogue = "";
         switch (stepGained)
