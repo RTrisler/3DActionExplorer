@@ -8,6 +8,7 @@ public class PlayerLocomotion : MonoBehaviour
     InputManager inputManager;
     AnimatorManager animatorManager;
     STEPManager stepManager;
+    
 
     Vector3 moveDirection;
     Transform cameraObject;

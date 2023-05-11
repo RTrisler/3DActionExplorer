@@ -12,6 +12,7 @@ public class InputManager : MonoBehaviour
     PlayerLocomotion playerLocomotion;
     AnimatorManager animatorManager;
     PlayerCombat playerCombat;
+    public JumpChargeBar jumpChargeBar;
 
     public Vector2 movementInput;
     public Vector2 cameraInput;
@@ -27,6 +28,7 @@ public class InputManager : MonoBehaviour
     public bool sprint_input;
     public bool jump_input;
     private bool _jumpCharging;
+    public bool _extendedJump = false;
 
     public bool attack_input;
     public bool _canSprint = false;
@@ -62,9 +64,12 @@ public class InputManager : MonoBehaviour
 
     private void Update()
     {
+        jumpChargeBar.SetCharge(0f);
         if (_jumpCharging)
         {
             _jumpCharge += Time.deltaTime;
+            if (_extendedJump)
+                jumpChargeBar.SetCharge(_jumpCharge);
         }
     }
 

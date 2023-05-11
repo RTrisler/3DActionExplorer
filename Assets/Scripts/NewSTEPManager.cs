@@ -35,6 +35,7 @@ public class NewSTEPManager : MonoBehaviour
                 break;
             case STEP.T:
                 _playerMovement._extendedJump = true;
+                _playerInput._extendedJump = true;
                 Debug.Log("T collected");
                 break;
             case STEP.E:
