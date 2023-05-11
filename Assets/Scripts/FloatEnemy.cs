@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Threading.Tasks;
+using TMPro;
 
 public class FloatEnemy : MonoBehaviour
 {
@@ -19,6 +20,9 @@ public class FloatEnemy : MonoBehaviour
 
     [SerializeField]
     private GameObject _myProj;
+
+    [SerializeField]
+    private TextMeshProUGUI _scoreUi;
 
     [SerializeField]
     private Transform _firePoint;
@@ -43,6 +47,8 @@ public class FloatEnemy : MonoBehaviour
     void Die()
     {
         Debug.Log("Enemy Died");
+        _player.score += 5;
+        addScore(_player.score);
         StopAllCoroutines();
         Destroy(gameObject);
         // Die Animation
@@ -50,6 +56,11 @@ public class FloatEnemy : MonoBehaviour
         GetComponent<SphereCollider>().enabled = false;
         gameObject.SetActive(false);
         this.enabled = false;
+    }
+
+    private void addScore(int score)
+    {
+        _scoreUi.text = "Score: " + score.ToString();
     }
 
     private void OnTriggerEnter(Collider other)

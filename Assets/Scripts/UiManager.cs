@@ -189,7 +189,7 @@ public class UiManager : MonoBehaviour
                 STEPDialogue = "You've gained S, you can now sprint with SHIFT and have increased movement speed!";
                 break;
             case STEP.T:
-                STEPDialogue = "You've gained T, you can now charge your jump by holding down the jump button!";
+                STEPDialogue = "You've gained T, you can now charge your jump by holding down the jump button! You jump charge will be indicated by the green bar next to your health.";
                 break;
             case STEP.E:
                 STEPDialogue = "You've gained E, you can now open special doors!";
