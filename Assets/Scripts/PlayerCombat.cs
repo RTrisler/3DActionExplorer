@@ -6,6 +6,7 @@ public class PlayerCombat : MonoBehaviour
 {
     Animator anim;
     AnimatorManager animatorManager;
+    PlayerManager playerManager;
 
     [SerializeField]
     private AudioClip _swordAudio;
@@ -23,12 +24,15 @@ public class PlayerCombat : MonoBehaviour
 
     public int attackDamage = 40;
 
+    public bool isAttacking = false;
+
 
     // Update is called once per frame
     private void Awake()
     {
         // Play attack animation
         animatorManager = GetComponent<AnimatorManager>();
+        playerManager = GetComponent<PlayerManager>();
         anim = GetComponent<Animator>();
     }
 
@@ -52,7 +56,9 @@ public class PlayerCombat : MonoBehaviour
             if (Time.time - lastClickedTime >= 0.5f)
             {
                 anim.runtimeAnimatorController = combo[comboCounter].animatorOV;
-                anim.Play("Attack",0,0);
+                anim.Play("Attack", 0, 0);
+                
+                //animatorManager.PlayTargetAnimation("Attack", true);
                 SoundManager.Instance.playSoundQuick(_swordAudio);
                 weapon.damage = combo[comboCounter].damage;
                 // Detect enemies in range of the attack
@@ -79,8 +85,10 @@ public class PlayerCombat : MonoBehaviour
 
     public void ExitAttack()
     {
-        if(anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.9 && anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
+        if(anim.GetCurrentAnimatorStateInfo(1).normalizedTime > 0.9 && anim.GetCurrentAnimatorStateInfo(1).IsTag("Attack"))
         {
+            isAttacking = false;
+            playerManager.isInteracting = false;
             Debug.Log("Exit Attack");
             comboCounter = 0;
             Invoke("EndCombo", 1);

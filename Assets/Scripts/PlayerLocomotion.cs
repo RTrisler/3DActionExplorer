@@ -8,6 +8,7 @@ public class PlayerLocomotion : MonoBehaviour
     InputManager inputManager;
     AnimatorManager animatorManager;
     STEPManager stepManager;
+    PlayerCombat playerCombat;
     
 
     Vector3 moveDirection;
@@ -49,6 +50,7 @@ public class PlayerLocomotion : MonoBehaviour
         animatorManager = GetComponent<AnimatorManager>();
         playerRigidBody = GetComponent<Rigidbody>();
         stepManager = GetComponent<STEPManager>();
+        playerCombat = GetComponent<PlayerCombat>();
         cameraObject = Camera.main.transform;
 
     }
@@ -57,6 +59,7 @@ public class PlayerLocomotion : MonoBehaviour
     {
         
         HandleFallingAndLanding();
+        Debug.Log(playerCombat.isAttacking + " : isAttacking");
         if (playerManager.isInteracting)
             return;
         
