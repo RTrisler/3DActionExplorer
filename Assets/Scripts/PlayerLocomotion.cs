@@ -20,6 +20,7 @@ public class PlayerLocomotion : MonoBehaviour
     public float fallingVelocity;
     public float rayCastHeightOffset = 0.5f;
     public LayerMask groundLayer;
+    public float minimumDistanceNeededToBeginFall = 1f;
 
     [Header("Movement Flags")]
     public bool isSprinting;
@@ -54,11 +55,11 @@ public class PlayerLocomotion : MonoBehaviour
 
     public void HandleAllMovement()
     {
+        
         HandleFallingAndLanding();
-
         if (playerManager.isInteracting)
             return;
-
+        
         HandleMovement();
         HandleRotation();
     }
@@ -141,7 +142,8 @@ public class PlayerLocomotion : MonoBehaviour
             playerRigidBody.AddForce(-Vector3.up * fallingVelocity * inAirTimer);
         }
 
-        if (Physics.SphereCast(rayCastOrigin, 0.05f, -Vector3.up, out hit, 0.5f, groundLayer))
+        Debug.DrawRay(rayCastOrigin, -Vector3.up* minimumDistanceNeededToBeginFall, Color.red, 0.1f, false);
+        if (Physics.Raycast(rayCastOrigin, -Vector3.up, out hit, minimumDistanceNeededToBeginFall, groundLayer))
         {
             if (!isGrounded && playerManager.isInteracting)
             {
@@ -150,7 +152,7 @@ public class PlayerLocomotion : MonoBehaviour
 
             inAirTimer = 0;
             isGrounded = true;
-            playerManager.isInteracting = false;
+            //playerManager.isInteracting = false;
         }
         else
         {
