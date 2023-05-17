@@ -62,15 +62,15 @@ public class PlayerCombat : MonoBehaviour
                 SoundManager.Instance.playSoundQuick(_swordAudio);
                 weapon.damage = combo[comboCounter].damage;
                 // Detect enemies in range of the attack
-                Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
+                //Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
 
                 // Damage Enemy
-                foreach(Collider enemy in hitEnemies)
+                /*foreach(Collider enemy in hitEnemies)
                 {
                     Debug.Log("Hit enemy: " + enemy.name);
                     if (enemy.GetComponent<FloatEnemy>() != null)
                         enemy.GetComponent<FloatEnemy>().TakeDamage(weapon.damage);
-                }
+                }*/
                 comboCounter++;
                 lastClickedTime = Time.time;
 
@@ -99,6 +99,17 @@ public class PlayerCombat : MonoBehaviour
     {
         comboCounter = 0;
         lastComboEnd = Time.time;
+    }
+
+
+    public void OpenDamageCollider()
+    {
+        weapon.EnableTriggerBox();
+    }
+
+    public void CloseDamageCollider()
+    {
+        weapon.DisableTriggerBox();
     }
 
     void OnDrawGizmosSelected() {

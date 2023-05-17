@@ -6,29 +6,35 @@ public class Weapon : MonoBehaviour
 {
     public int damage;
 
-    BoxCollider triggerBox;
+    Collider triggerBox;
 
-    private void Start()
+    private void Awake()
     {
-        triggerBox = GetComponent<BoxCollider>();
+        triggerBox = GetComponent<Collider>();
+        triggerBox.gameObject.SetActive(true);
+        triggerBox.isTrigger = true;
+        triggerBox.enabled = false;
     }
 
     private void OnTriggerEnter(Collider other)
     {
         Debug.LogWarning("TriggerEnter");
-        var enemy = other.gameObject.GetComponent<FloatEnemy>();
-        if (enemy != null)
+        if (other.tag == "Enemy")
         {
-            enemy.TakeDamage(damage);
+            var enemy = other.gameObject.GetComponent<FloatEnemy>();
+            if (enemy != null)
+            {
+                enemy.TakeDamage(damage);
+            }
         }
     }
 
-    private void EnableTriggerBox()
+    public void EnableTriggerBox()
     {
         triggerBox.enabled = true;
     }
 
-    private void DisableTriggerBox()
+    public void DisableTriggerBox()
     {
         triggerBox.enabled = false;
     }
