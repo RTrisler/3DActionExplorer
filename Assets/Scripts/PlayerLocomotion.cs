@@ -23,11 +23,13 @@ public class PlayerLocomotion : MonoBehaviour
     public float rayCastHeightOffset = 0.5f;
     public LayerMask groundLayer;
     public float minimumDistanceNeededToBeginFall = 1f;
+    public bool falling;
 
     [Header("Movement Flags")]
     public bool isSprinting;
     public bool isGrounded;
     public bool isJumping;
+    
 
     public bool _extendedJump = false;
 
@@ -61,11 +63,11 @@ public class PlayerLocomotion : MonoBehaviour
     {
         
         HandleFallingAndLanding();
-        HandleRolling();
+        
         Debug.Log(playerCombat.isAttacking + " : isAttacking");
         if (playerManager.isInteracting)
             return;
-        
+        HandleRolling();
         HandleMovement();
         HandleRotation();
         
@@ -143,6 +145,7 @@ public class PlayerLocomotion : MonoBehaviour
         {
             if (!playerManager.isInteracting)
             {
+                falling = true;
                 animatorManager.PlayTargetAnimation("Falling", true);
             }
 
@@ -156,6 +159,7 @@ public class PlayerLocomotion : MonoBehaviour
         {
             if (!isGrounded && playerManager.isInteracting)
             {
+                falling = false;
                 animatorManager.PlayTargetAnimation("Landing", true);
             }
 

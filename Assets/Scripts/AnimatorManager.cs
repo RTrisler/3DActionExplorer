@@ -91,15 +91,22 @@ public class AnimatorManager : MonoBehaviour
 
     private void OnAnimatorMove()
     {
-        Debug.Log("Animator MOVEEEE");
-        if(playerManager.isInteracting == false)
-            return;
-        Debug.Log("Animator LEFT");
-        float delta = Time.deltaTime;
-        playerLocomotion.playerRigidBody.drag = 0;
-        Vector3 deltaPosition = animator.deltaPosition;
-        deltaPosition.y = 0;
-        Vector3 velocity = deltaPosition / delta;
-        playerLocomotion.playerRigidBody.velocity = velocity;
+        if (playerLocomotion.falling)
+        {
+            Debug.Log("We Made it");
+        }
+        else
+        {
+            Debug.Log("Animator MOVEEEE");
+            if(playerManager.isInteracting == false)
+                return;
+            Debug.Log("Animator LEFT");
+            float delta = Time.deltaTime;
+            playerLocomotion.playerRigidBody.drag = 0;
+            Vector3 deltaPosition = animator.deltaPosition;
+            deltaPosition.y = 0;
+            Vector3 velocity = deltaPosition / delta;
+            playerLocomotion.playerRigidBody.velocity = velocity;
+        }
     }
 }
