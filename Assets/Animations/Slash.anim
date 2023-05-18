@@ -49793,10 +49793,26 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 0.6666667
+    functionName: EnableSlash
+    data: 
+    objectReferenceParameter: {fileID: 11500000, guid: d36b380b2631861418400389c53b0c64,
+      type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 0.76666665
     functionName: CloseDamageCollider
     data: 
     objectReferenceParameter: {fileID: 11500000, guid: 3b359c35a0292a34b934357d616faf6e,
+      type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.96666664
+    functionName: DisableSlash
+    data: 
+    objectReferenceParameter: {fileID: 11500000, guid: d36b380b2631861418400389c53b0c64,
       type: 3}
     floatParameter: 0
     intParameter: 0
