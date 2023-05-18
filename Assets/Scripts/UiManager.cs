@@ -29,6 +29,8 @@ public class UiManager : MonoBehaviour
     private string E = "";
     private string P = "";
 
+    private bool _isTalking;
+
     private void OnEnable()
     {
         _interactUi.text = "Score: 0";
@@ -42,6 +44,7 @@ public class UiManager : MonoBehaviour
         ScoreCollect.OnScoreCollect += addScore;
         ScoreCollect.OnSTEPCollect += updateSTEPUi;
         ScoreCollect.OnSTEPCollect += showSTEPability;
+        INPCInteractable.OnTalkNPC += NPCDialogue;
     }
     private void OnDisable()
     {
@@ -53,6 +56,7 @@ public class UiManager : MonoBehaviour
         ScoreCollect.OnSTEPCollect -= updateSTEPUi;
         PlayerManager.OnSpecialInteractionHit -= changeSpecialInteractionUi;
         ScoreCollect.OnSTEPCollect -= showSTEPability;
+        INPCInteractable.OnTalkNPC -= NPCDialogue;
     }
 
     private void Start()
@@ -201,5 +205,21 @@ public class UiManager : MonoBehaviour
         textMeshPro.text = STEPDialogue;
         yield return new WaitForSeconds(5);
         _dialogue.SetActive(false);
+    }
+
+    private void NPCDialogue()
+    {
+        var textMeshPro = _dialogue.GetComponentInChildren<TextMeshProUGUI>();
+        if (!_isTalking)
+        {
+            textMeshPro.text = "Please... save us... there are 4 abilities to collect... look for the red... o...r...bs...";
+            _isTalking = true;
+        }
+        else
+        {
+            textMeshPro.text = "";
+            _dialogue.SetActive(false);
+            _isTalking = false;
+        }
     }
 }

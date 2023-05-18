@@ -6,6 +6,7 @@ using System;
 public class INPCInteractable : MonoBehaviour, IInteractable
 {
     public static event Action<float, float, Transform> OnNPCInteract;
+    public static event Action<> OnTalkNPC;
 
     [SerializeField]
     private Transform _cameraPosition;
@@ -26,11 +27,13 @@ public class INPCInteractable : MonoBehaviour, IInteractable
         if (!_isInteracting)
         {
             OnNPCInteract?.Invoke(_lookAngle, _pivotAngle, _cameraPosition);
+            OnTalkNPC?.Invoke();
             _isInteracting = true;
         }
         else
         {
             OnNPCInteract?.Invoke(_lookAngle, _pivotAngle, playerTransform);
+            OnTalkNPC?.Invoke();
             _isInteracting = false;
         }
     }
