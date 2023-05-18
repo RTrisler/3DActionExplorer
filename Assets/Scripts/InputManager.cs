@@ -13,6 +13,7 @@ public class InputManager : MonoBehaviour
     AnimatorManager animatorManager;
     PlayerCombat playerCombat;
     public JumpChargeBar jumpChargeBar;
+    public PauseMenu pauseMenu;
 
     public Vector2 movementInput;
     public Vector2 cameraInput;
@@ -35,6 +36,8 @@ public class InputManager : MonoBehaviour
     
     public bool roll_input;
     public bool roll_flag;
+    
+    public bool pausedInput = false;
 
 
     private void Awake()
@@ -61,6 +64,7 @@ public class InputManager : MonoBehaviour
 
             playerControls.PlayerActions.Attack.performed += i => attack_input = true;
             playerControls.PlayerActions.Roll.performed += i => roll_input = true;
+            playerControls.PlayerActions.Pause.performed += i => pausedInput = true;
         }
 
         playerControls.Enable();
@@ -94,6 +98,7 @@ public class InputManager : MonoBehaviour
         HandleJumpInput();
         HandleAttackInput();
         HandleRollInput();
+        HandlePauseInput();
         // Handle Action input ...
     }
 
@@ -152,6 +157,16 @@ public class InputManager : MonoBehaviour
             roll_input = false;
             Debug.LogWarning("Roll ");
             roll_flag = true;
+        }
+    }
+
+    private void HandlePauseInput()
+    {
+        if(pausedInput)
+        {
+            Debug.Log("Pause ");
+            pauseMenu.PauseGame();
+            pausedInput = false;
         }
     }
 

@@ -26,7 +26,7 @@ public class ScoreManager : MonoBehaviour
     // call it again. If you want to launch the game from another scene, you can 
     // call this method again in the Start method of any script in that scene, since
     // calling this method multiple times doesn't hurt anything.
-    HS.Init(this, "TEAM 5"); // you can hard code your game's name
+    HS.Init(this, "Marvin's Revenge"); // you can hard code your game's name
   }
 
     public void SubmitScore()
