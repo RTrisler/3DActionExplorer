@@ -6,7 +6,7 @@ using System;
 public class INPCInteractable : MonoBehaviour, IInteractable
 {
     public static event Action<float, float, Transform> OnNPCInteract;
-    public static event Action<> OnTalkNPC;
+    public static event Action OnTalkNPC;
 
     [SerializeField]
     private Transform _cameraPosition;
