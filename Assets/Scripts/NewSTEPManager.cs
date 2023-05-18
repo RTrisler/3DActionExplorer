@@ -57,6 +57,7 @@ public class NewSTEPManager : MonoBehaviour
             default:
                 break;
         }
+        checkAllSTEP();
     }
 
     private void checkAllSTEP()
