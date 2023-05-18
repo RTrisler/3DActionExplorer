@@ -18,7 +18,7 @@ public class Weapon : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.LogWarning("TriggerEnter");
+        Debug.LogWarning("WeaponTrigger");
         if (other.tag == "Enemy")
         {
             var enemy = other.gameObject.GetComponent<FloatEnemy>();

@@ -33,6 +33,7 @@ public class FloatEnemy : MonoBehaviour
         healthSlider.maxValue = maxHealth;
     }
 
+
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
@@ -63,29 +64,25 @@ public class FloatEnemy : MonoBehaviour
         _scoreUi.text = "Score: " + score.ToString();
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void PlayerDetected(PlayerManager player)
     {
-        if(other.TryGetComponent<PlayerManager>(out PlayerManager player))
+        
+        _inRange = true;
+        _player = player;
+        if (!_isFiring)
         {
-            _inRange = true;
-            _player = player;
-            if (!_isFiring)
-            {
-                _isFiring = true;
-                //MoveTowardsPlayer(_lookTime);
-                var end = Time.time + 3f;
-                StartCoroutine(MoveTowardsP(end));
-            }
+            _isFiring = true;
+            //MoveTowardsPlayer(_lookTime);
+            var end = Time.time + 3f;
+            StartCoroutine(MoveTowardsP(end));
         }
+        
     }
 
-    private void OnTriggerExit(Collider other)
+    public void PlayerUndetected(PlayerManager player)
     {
-        if (other.TryGetComponent<PlayerManager>(out PlayerManager player))
-        {
-            _inRange = false;
-            _player = player;
-        }
+        _inRange = false;
+        _player = player;
     }
 
     public async void MoveTowardsPlayer(float duration)

@@ -71763,7 +71763,7 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.5
+  - time: 0.6666667
     functionName: OpenDamageCollider
     data: 
     objectReferenceParameter: {fileID: 11500000, guid: 3b359c35a0292a34b934357d616faf6e,
@@ -71771,7 +71771,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.8333334
+  - time: 1
     functionName: CloseDamageCollider
     data: 
     objectReferenceParameter: {fileID: 11500000, guid: 3b359c35a0292a34b934357d616faf6e,
