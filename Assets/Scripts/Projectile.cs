@@ -24,6 +24,13 @@ public class Projectile : MonoBehaviour, IDamageAble
     {
         _myBody = GetComponent<Rigidbody>();
         _myBody.velocity = transform.forward * _projSpeed;
+        StartCoroutine(Despawn());
+    }
+
+    private IEnumerator Despawn()
+    {
+        yield return new WaitForSeconds(7);
+        Destroy(gameObject);
     }
 
 }
