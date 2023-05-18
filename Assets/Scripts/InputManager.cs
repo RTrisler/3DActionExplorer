@@ -32,6 +32,9 @@ public class InputManager : MonoBehaviour
 
     public bool attack_input;
     public bool _canSprint = false;
+    
+    public bool roll_input;
+    public bool roll_flag;
 
 
     private void Awake()
@@ -57,6 +60,7 @@ public class InputManager : MonoBehaviour
             playerControls.PlayerActions.Interact.performed += Interact_performed;
 
             playerControls.PlayerActions.Attack.performed += i => attack_input = true;
+            playerControls.PlayerActions.Roll.performed += i => roll_input = true;
         }
 
         playerControls.Enable();
@@ -89,6 +93,7 @@ public class InputManager : MonoBehaviour
         HandleSprintingInput();
         HandleJumpInput();
         HandleAttackInput();
+        HandleRollInput();
         // Handle Action input ...
     }
 
@@ -106,6 +111,8 @@ public class InputManager : MonoBehaviour
         moveAmount = Mathf.Clamp01(Mathf.Abs(horizontalInput) + Mathf.Abs(verticalInput));
         animatorManager.UpdateAnimatorValues(0, moveAmount, playerLocomotion.isSprinting);
     }
+
+    
 
     private void HandleSprintingInput()
     {
@@ -134,6 +141,17 @@ public class InputManager : MonoBehaviour
         {
             attack_input = false;
             playerCombat.HandleAttack();
+        }
+    }
+
+    private void HandleRollInput()
+    {
+
+        if (roll_input)
+        {
+            roll_input = false;
+            Debug.LogWarning("Roll ");
+            roll_flag = true;
         }
     }
 

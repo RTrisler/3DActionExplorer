@@ -6,6 +6,9 @@ public class AnimatorManager : MonoBehaviour
 {
 
     public Animator animator;
+    public InputManager inputManager;
+    public PlayerManager playerManager;
+    public PlayerLocomotion playerLocomotion;
     int horizontal;
     int vertical;
 
@@ -14,6 +17,8 @@ public class AnimatorManager : MonoBehaviour
         animator = GetComponent<Animator>();
         horizontal = Animator.StringToHash("Horizontal");
         vertical = Animator.StringToHash("Vertical");
+        inputManager = GetComponent<InputManager>();
+        playerLocomotion = GetComponent<PlayerLocomotion>();
     }
 
     public void PlayTargetAnimation(string targetAnimation, bool isInteracting)
@@ -82,5 +87,19 @@ public class AnimatorManager : MonoBehaviour
         
         animator.SetFloat(horizontal, snappedHorizontal, 0.1f, Time.deltaTime);
         animator.SetFloat(vertical, snappedVertical, 0.1f, Time.deltaTime);
+    }
+
+    private void OnAnimatorMove()
+    {
+        Debug.Log("Animator MOVEEEE");
+        if(playerManager.isInteracting == false)
+            return;
+        Debug.Log("Animator LEFT");
+        float delta = Time.deltaTime;
+        playerLocomotion.playerRigidBody.drag = 0;
+        Vector3 deltaPosition = animator.deltaPosition;
+        deltaPosition.y = 0;
+        Vector3 velocity = deltaPosition / delta;
+        playerLocomotion.playerRigidBody.velocity = velocity;
     }
 }

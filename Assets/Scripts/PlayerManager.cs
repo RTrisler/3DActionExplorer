@@ -100,6 +100,10 @@ public class PlayerManager : MonoBehaviour
 
     private void Update()
     {
+        
+        isInteracting = animator.GetBool("isInteracting");
+        inputManager.roll_flag = false;
+
         if (!isInteractingWithNPC)
         {
             inputManager.HandleAllInputs();
@@ -145,7 +149,7 @@ public class PlayerManager : MonoBehaviour
             cameraManager.HandleAllCameraMovement();
         }
 
-        isInteracting = animator.GetBool("isInteracting");
+        
 
         playerLocomotion.isJumping = animator.GetBool("isJumping");
         animator.SetBool("isGrounded", playerLocomotion.isGrounded);

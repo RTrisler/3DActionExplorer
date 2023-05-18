@@ -9,6 +9,7 @@ public class PlayerLocomotion : MonoBehaviour
     AnimatorManager animatorManager;
     STEPManager stepManager;
     PlayerCombat playerCombat;
+    Transform myTransform;
     
 
     Vector3 moveDirection;
@@ -52,6 +53,7 @@ public class PlayerLocomotion : MonoBehaviour
         stepManager = GetComponent<STEPManager>();
         playerCombat = GetComponent<PlayerCombat>();
         cameraObject = Camera.main.transform;
+        myTransform = transform;
 
     }
 
@@ -59,12 +61,14 @@ public class PlayerLocomotion : MonoBehaviour
     {
         
         HandleFallingAndLanding();
+        HandleRolling();
         Debug.Log(playerCombat.isAttacking + " : isAttacking");
         if (playerManager.isInteracting)
             return;
         
         HandleMovement();
         HandleRotation();
+        
     }
 
     private void HandleMovement()
@@ -216,6 +220,31 @@ public class PlayerLocomotion : MonoBehaviour
             Vector3 playerVelocity = moveDirection;
             playerVelocity.y = jumpingVelocity;
             playerRigidBody.velocity = playerVelocity;
+        }
+    }
+
+    private void HandleRolling()
+    {
+        if (animatorManager.animator.GetBool("isInteracting"))
+            return;
+
+        if (inputManager.roll_flag)
+        {
+            moveDirection = cameraObject.forward * inputManager.verticalInput;
+            moveDirection += cameraObject.right * inputManager.horizontalInput;
+
+            if(inputManager.moveAmount > 0)
+            {
+                animatorManager.PlayTargetAnimation("Roll", true);
+                moveDirection.y = 0;
+                Quaternion rollRotation = Quaternion.LookRotation(moveDirection);
+                myTransform.rotation = rollRotation;
+            }
+            else
+            {
+                animatorManager.PlayTargetAnimation("Backstep", true);
+            }
+            
         }
     }
 
