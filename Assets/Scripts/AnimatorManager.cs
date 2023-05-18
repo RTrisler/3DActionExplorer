@@ -95,6 +95,14 @@ public class AnimatorManager : MonoBehaviour
         {
             Debug.Log("We Made it");
         }
+        else if (playerLocomotion._extendedJump)
+        {
+            Debug.Log("eXTENDO");
+        }
+        else if (playerLocomotion.isJumping)
+        {
+            Debug.Log("Jump");
+        }
         else
         {
             Debug.Log("Animator MOVEEEE");
