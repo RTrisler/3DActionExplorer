@@ -213,7 +213,7 @@ public class UiManager : MonoBehaviour
         if (!_isTalking)
         {
             _dialogue.SetActive(true);
-            textMeshPro.text = "Please... save us... there are 4 abilities to collect... look for the red... o...r...bs...";
+            textMeshPro.text = "Please... save us... there are 4 abilities to collect... look for the red... o...r...bs... once collected... find the spot with four torches";
             _isTalking = true;
         }
         else
